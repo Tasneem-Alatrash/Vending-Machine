@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap v5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+
+<body>
+
+    <div class="container w-100 vh-100 ">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-6">
+                <div class="card text-bg-primary mb-3">
+                    <div class="card-header">
+                        <h2>Vending Machine</h2>
+                        <span class="price bg-light text-primary badge">Price : 25 coins</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Choose product : </h3>
+                        <div class="items d-flex justify-content-around mt-3  text-primary">
+                            <div class="item pt-3">
+                                <img src="./assets/img/coffee.webp" alt="Coffee" />
+                                <p>Coffee</p>
+                            </div>
+                            <div class="item pt-3">
+                                <img src="./assets/img/Nescafe.webp" alt="Nescafe" />
+                                <p>Nescafe</p>
+                            </div>
+                            <div class="item pt-3">
+                                <img src="./assets/img/Chocolate.webp" alt="Chocolate" />
+                                <p>Chocolate</p>
+                            </div>
+                        </div>
+                        <div class="items d-flex justify-content-around mt-3  text-primary">
+                            <div class="item pt-3">
+                                <img src="./assets/img/Water.webp" alt="Water" />
+                                <p>Water</p>
+                            </div>
+                            <div class="item pt-3">
+                                <img src="./assets/img/Tea.webp" alt="Tea" />
+                                <p>Tea</p>
+                            </div>
+                            <div class="item pt-3">
+                                <img src="./assets/img/Chips.webp" alt="Chips" />
+                                <p>Chips</p>
+                            </div>
+                        </div>
+                        <p class="mt-3">Selected Product :
+                            <span class="selected-product bg-light text-primary badge">None</span>
+                        </p>
+                        <hr>
+                        <div class="process bg-white text-dark p-3 rounded-2">
+                            <h3 class="mb-3">Insert coins : </h3>
+                            <button class="btn btn-outline-primary me-2">+5 coins</button>
+                            <button class="btn btn-outline-primary me-2">+10 coins</button>
+                            <button class="btn btn-outline-danger">Reset</button>
+                            <div class="Payment_progress mt-4">
+                                <div class="d-flex justify-content-between">
+                                    <p>Payment progress</p>
+                                    <p class="progress-label">0 / 25</p>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap v5.3 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <!-- custom js -->
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>
