@@ -61,3 +61,44 @@ body {
   padding: 10px;
   font-size: 1rem;
 }
+.footer-custom {
+  background: linear-gradient(to right, #0d6efd, #003f88);
+  color: #fff;
+}
+
+.footer-custom .social-icons a {
+  font-size: 1.5rem;
+  color: #ffffffbb;
+  transition: 0.3s;
+}
+
+.footer-custom .social-icons a:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+.dfa-box {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.CState,
+.AState {
+  font-size: 1.3rem;
+  padding: 10px 15px;
+}
+
+.message {
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.state-history {
+  border-left: 4px solid #198754;
+  font-size: 1.1rem;
+}
+
+.dfa-box h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
