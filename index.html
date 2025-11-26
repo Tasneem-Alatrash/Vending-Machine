@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Vending Machine</title>
 
     <!-- Bootstrap v5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -78,7 +78,29 @@
             </div>
 
             <div class="col-md-6">
+                <div class="card DFA-Card text-white mb-3">
+                    <div class="card-header">
+                        <h2>DFA Monitor</h2>
 
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="state">
+                                <h3>Current State : </h3>
+                                <span class="CState bg-light text-secondary badge">q0</span>
+                            </div>
+                            <div class="amount">
+                                <h3>Current amount : </h3>
+                                <span class="AState bg-light text-secondary badge">0</span>
+                            </div>
+
+                        </div>
+                        <div class="message alert alert-secondary mt-4 p-3">Waiting for coins...</div>
+                        <hr>
+                        <h3>State History</h3>
+                        <div class="state-history bg-secondary-subtle text-dark rounded-1 p-2">q0</div>
+                    </div>
+                </div>
             </div>
         </div>
 

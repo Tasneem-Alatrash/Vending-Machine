@@ -52,3 +52,12 @@ body {
   background: #2f73ff;
   transition: 0.4s ease-in-out;
 }
+
+.DFA-Card {
+  background: rgb(65, 71, 78);
+}
+.CState,
+.AState {
+  padding: 10px;
+  font-size: 1rem;
+}
