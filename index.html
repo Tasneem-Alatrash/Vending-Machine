@@ -15,6 +15,26 @@
 </head>
 
 <body>
+    <!-- QR WAIT SCREEN -->
+    <div id="qr-wait-screen" style="
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:white;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+            font-family:'Poppins', sans-serif;
+            text-align:center;
+        ">
+
+        <h2 style="font-size:28px; margin-bottom:15px;">🔍 Scanning QR…</h2>
+        <div class="spinner-border text-primary" style="width:3rem; height:3rem;"></div>
+        <p style="margin-top:15px; font-size:18px; color:#555;">Please wait…</p>
+    </div>
+
     <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">Vending Machine</a>
@@ -130,7 +150,7 @@
             <p class="mb-1">Designed & developed with ❤️ </p>
 
             <p class="small mb-3">
-                Web development • JavaScript • UI/UX • DFA Logic
+                Web development • JavaScript • UI/UX • NFA Logic
             </p>
 
 

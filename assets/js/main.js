@@ -8,103 +8,146 @@ let state = "Idle";
 let history = ["Idle"];
 let total = 0;
 let selectedProduct = "None";
+
 const price = 25;
 
-// ============ EVENT LISTENERS ============
+// ================= QR WAIT SEQUENCE =================
+setTimeout(() => {
+  document.getElementById("qr-wait-screen").style.display = "none";
+
+  history.push("QR-Wait");
+  state = "Menu";
+  history.push("Menu");
+
+  updateDFA("QR scanned. Select a product.", "alert-info");
+  updateProgress();
+}, 1500);
+
+// ================= PRODUCT SELECTION =================
 images.forEach((img) => {
   img.addEventListener("click", (e) => {
     selectedProduct = e.target.alt;
     document.querySelector(".selected-product").textContent = selectedProduct;
 
-    if (state === "Menu") {
-      changeState(
-        "Balance-0",
-        `Product ${selectedProduct} selected. Insert coins.`,
-        "alert-info"
-      );
-    }
+    // When user selects a product
+    images.forEach((img) => {
+      img.addEventListener("click", (e) => {
+        selectedProduct = e.target.alt;
+        document.querySelector(".selected-product").textContent =
+          selectedProduct;
+
+        // أول اختيار بعد Menu → Balance-0
+        if (history.includes("Menu") && !history.includes("Balance-0")) {
+          state = "Balance-0";
+          history.push("Balance-0");
+          updateDFA(
+            `Selected: ${selectedProduct}. Insert coins.`,
+            "alert-info"
+          );
+          return;
+        }
+
+        // أي تغيير لاحق للمنتج → لا نغير الـ state ولا الـ total
+        updateDFA(
+          `Changed product to: ${selectedProduct}. Continue inserting coins.`,
+          "alert-info"
+        );
+      });
+    });
   });
 });
 
+// ================= COINS =================
 coins5.addEventListener("click", () => insertCoin(5));
 coins10.addEventListener("click", () => insertCoin(10));
 ResetBtn.addEventListener("click", resetMachine);
 
-// ============ STATE MACHINE ============
-
+// ================= STATE MACHINE LOGIC =================
 function insertCoin(amount) {
-  if (state === "Idle" || state === "QR-Wait" || state === "Menu") {
-    updateDFA("Please select a product first.", "alert-warning");
+  if (state === "Menu") {
+    updateDFA("Please select a product first!", "alert-warning");
     return;
   }
 
-  if (state === "Done") {
-    updateDFA("Product already dispensed. Reset machine.", "alert-warning");
+  if (state === "Idle" || state === "QR-Wait") {
+    updateDFA("Please scan QR first!", "alert-warning");
     return;
   }
 
   total += amount;
 
-  // ===================== TRANSITIONS BASED ON DRAWN DFA =====================
-
   switch (state) {
     case "Balance-0":
-      if (amount === 5) changeState("Balance-5", "Balance = 5", "alert-info");
-      if (amount === 10)
-        changeState("Balance-10", "Balance = 10", "alert-info");
+      if (amount === 5) changeState("Balance-5", "Balance = 5");
+      if (amount === 10) changeState("Balance-10", "Balance = 10");
       break;
 
     case "Balance-5":
-      if (amount === 5) changeState("Balance-10", "Balance = 10", "alert-info");
-      if (amount === 10)
-        changeState("Balance-15", "Balance = 15", "alert-info");
+      if (amount === 5) changeState("Balance-10", "Balance = 10");
+      if (amount === 10) changeState("Balance-15", "Balance = 15");
       break;
 
     case "Balance-10":
-      if (amount === 5) changeState("Balance-15", "Balance = 15", "alert-info");
-      if (amount === 10)
-        changeState("Balance-20", "Balance = 20", "alert-info");
+      if (amount === 5) changeState("Balance-15", "Balance = 15");
+      if (amount === 10) changeState("Balance-20", "Balance = 20");
       break;
 
     case "Balance-15":
-      if (amount === 5) changeState("Balance-20", "Balance = 20", "alert-info");
-      if (amount === 10)
-        changeState("Done", `Product dispensed!`, "alert-success");
+      if (amount === 5) changeState("Balance-20", "Balance = 20");
+      if (amount === 10) changeState("Done", "");
       break;
 
     case "Balance-20":
-      // Any coin leads to Done
-      changeState(
-        "Done",
-        `Product dispensed! Change = ${total - price}`,
-        "alert-success"
-      );
+      changeState("Done", "");
       break;
   }
 
   updateProgress();
 }
 
-// ============ CHANGE STATE ============
-function changeState(newState, message, alertClass) {
+// ================= CHANGE STATE =================
+function changeState(newState, message) {
   state = newState;
   history.push(newState);
-  updateDFA(message, alertClass);
+
+  if (newState !== "Done") {
+    updateDFA(message, "alert-info");
+    return;
+  }
+
+  // ================= DONE STATE =================
+  let change = total - price;
+
+  if (change > 0) {
+    updateDFA(
+      `🎉 Product dispensed! Total inserted: ${total} coins. Returned change: ${change} coins.`,
+      "alert-success"
+    );
+  } else if (change === 0) {
+    updateDFA(
+      `🎉 Product dispensed! Exact payment (${total} coins).`,
+      "alert-success"
+    );
+  } else {
+    updateDFA(`🎉 Product dispensed!`, "alert-success");
+  }
 }
 
-// ============ RESET MACHINE ============
+// ================= RESET MACHINE =================
 function resetMachine() {
   total = 0;
   selectedProduct = "None";
-  state = "Menu";
-  history = ["Menu"];
 
-  document.querySelector(".selected-product").textContent = selectedProduct;
+  state = "Menu";
+  history = ["Idle", "QR-Wait", "Menu"];
+
+  document.querySelector(".selected-product").textContent = "None";
+
   updateProgress();
-  updateDFA("Machine reset. Select product.", "alert-secondary");
+  updateDFA("Machine reset. Select a product.", "alert-secondary");
 }
 
-// ============ UPDATE UI ============
+// ================= UI FUNCTIONS =================
 function updateProgress() {
   const width = (total / price) * 100;
   document.querySelector(".progress-bar").style.width = width + "%";
@@ -115,19 +158,16 @@ function updateDFA(msg, alertClass) {
   document.querySelector(".CState").textContent = state;
   document.querySelector(".AState").textContent = total;
 
-  const messageBox = document.querySelector(".message");
-  messageBox.textContent = msg;
+  const box = document.querySelector(".message");
+  box.textContent = msg;
 
-  messageBox.classList.remove(
+  box.classList.remove(
     "alert-success",
     "alert-warning",
     "alert-info",
     "alert-secondary"
   );
-  messageBox.classList.add(alertClass);
+  box.classList.add(alertClass);
 
   document.querySelector(".state-history").textContent = history.join(" → ");
 }
-
-// ================= INITIAL STATE =================
-changeState("Idle", "Scan QR to start the machine", "alert-secondary");
