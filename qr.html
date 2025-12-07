@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan QR to Open Vending Machine</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            max-width: 420px;
+            width: 100%;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .qr-box {
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Scan the QR to Start</h2>
+
+        <div class="qr-box">
+            <!-- ضعي هنا صورة الـ QR التي حفظتيها -->
+            <img src="./assets/img/Vending machine .png" alt="QR Code">
+        </div>
+
+        <div class="footer">Point your camera at the QR code to open the vending machine.</div>
+    </div>
+
+</body>
+
+</html>
